@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>Music</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Ado No Color">
+    <meta name="description" content="Ado No Color. Landing page.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="scripts/timeLoad.js"></script>
+    <script src="scripts/timeCount.js"></script>
+    <script src="scripts/menu.js"></script>
+
+    <link
+            href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+            rel="stylesheet"
+    />
+</head>
+
+<body onload="timeCount();">
+    <header>
+        <div class="menu">
+            <nav class="menubuttons">
+                <div class="list-item">
+                    <a href="index.html">About Me</a>
+                </div>
+                <div class="list-item">
+                    <a  href="music.html">Music</a>
+                </div>
+                <div class="list-item">
+                    <a  href="blog.html">Blog</a>
+                </div>
+                <div class="list-item">
+                    <a  href="photos.html">Photos</a>
+                </div>
+                <div class="list-item">
+                    <a  href="notes.html">Notes</a>
+                </div>
+            </nav>
+
+            <img id="logo" src="ind_img/adonocolor.svg">
+            <div id="clock"></div>
+        </div>
+    </header>
+
+    <main>
+                    <!--        Based layout for swiper.js components -->
+                    <div class="swiper-container">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <h2 class="project_title"><b>Dreaming of Silence in Mono*</b></h2>
+                                <img src="ind_img/mono.png" alt="album"/>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <h2 class="project_title"><b>*Stereo Echo</b></h2>
+                                <img src="ind_img/shining.jpg" alt="album"/>
+                            </div>
+                        </div>
+                    </div>
+    </main>
+
+    <footer>
+            <nav class="menubuttons">
+                <a href="contact.html">Contact</a>
+            </nav>
+
+        <p>© 2022 <sub>Ado</sub> No <sup>Color</sup>, LLC.<br>
+            Based in St. Petersburg.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="scripts/coverSwiper.js"></script>
+</body>
+</html>

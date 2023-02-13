@@ -1,0 +1,384 @@
+@media screen and (max-width: 650px) {
+    .tracklist {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .credits {
+        display: none;
+    }
+
+    .alb {
+        transform: scale(0.7);
+    }
+
+    .alb {
+        order: -1;
+    }
+}
+
+body {
+    background-color: hsl(216 43% 68%);
+    font-family: 'Inconsolata', monospace;
+    line-height: 1.5em;
+    padding: 0;
+    margin: 0;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+#logo {
+    min-width: 200px;
+    max-width: 1000px;
+    justify-self: flex-start;
+}
+
+.options {
+    padding: 0;
+}
+
+.blur {
+    width: 100vh;
+}
+
+.options > li {
+    display: inline-block;
+    list-style: none;
+    font-size: 2em;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.tracklistmenu > a:nth-child(odd) {
+    color: black;
+}
+
+.tracklistmenu > a:nth-child(odd) {
+    color: darkslategrey;
+}
+
+.contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: stretch;
+    padding-bottom: 20px;
+}
+
+.project_title {
+    margin: 0;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.tracklist {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.tracklistmenu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menubuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 20px;
+    font-size: 1.7em;
+}
+
+.credits {
+    flex: 1;
+    justify-self: center;
+    align-self: center;
+}
+
+.credits > p {
+    align-self: center;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer > .menubuttons {
+    margin-top: 50px;
+    padding: 0;
+    font-size: 1.5em;
+}
+
+
+.alb {
+    min-height: 50px;
+    max-height: 500px;
+    flex: 2;
+}
+
+#list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+ul {
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    border: black solid 1px;
+    margin-bottom: 20px;
+    padding: 5px;
+    background-color: white;
+}
+
+
+#toDoE1 {
+    font-family: 'Inconsolata', monospace;
+    width: 226px;
+    padding: 5px 5px 5px 40px;
+    background-color: white;
+    border: none;
+    border-radius: 25px;
+}
+
+li {
+    width: 304px;
+    display: flex;
+    justify-content: space-between;
+    border: black solid 1px;
+    border-radius: 25px;
+    list-style-type: none;
+    background-color: white;
+    padding: 5px 5px 5px 40px;
+}
+
+li.checked {
+    background-color: hsl(56, 100%, 50%);;
+}
+
+span {
+    width: 70px;
+    height: 30px;
+    border: black solid 1px;
+    border-radius: 25px;
+    font-weight: bold;
+    background-color: hsl(8, 100%, 59%);;
+    text-align: center;
+}
+
+.gallery-grid {
+    background-color: black;
+    padding: 0;
+    display: grid;
+    max-width: 100%;
+    grid-gap: 0;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+}
+
+.gallery-item img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+}
+
+.post > h2 {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.post_info {
+    padding-left: 100px;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    gap: 10px;
+}
+
+.contact_post_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact_post_info > * {
+    margin: 0;
+}
+
+.sign {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: sticky;
+    top: 0;
+    align-items: center;
+}
+
+.sign-container {
+    height: 100vh;
+}
+
+#clock {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.list-item.active {
+    text-decoration: underline;
+}
+
+.note_container {
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+}
+
+.gallery-container {;
+    align-self: center;
+    margin: auto;
+    padding-top: 60px;
+}
+
+.gallery-container h1 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.preloader {
+    margin-right: auto;
+    margin-left: auto;
+    border: 16px solid lightgray;
+    border-top: 16px solid hsl(8, 100%, 59%);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.gallery p {
+    margin-bottom: 15px;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin: 15px;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.gallery-ul {
+    justify-content: space-evenly;
+    margin: 10px 10px 0;
+    list-style: none;
+    word-break: break-word;
+}
+
+.error {
+    display: none;
+    text-align: center;
+    color: hsl(8, 100%, 59%);
+}
+
+.pages-nav {
+    justify-content: center;
+    margin: 15px;
+}
+
+.previous-button {
+    font-family: 'Inconsolata', monospace;
+    font-weight: bold;
+    background-color: hsl(8, 100%, 59%);
+    margin-right: 15px;
+    border-radius: 25px;
+}
+
+.next-button {
+    font-family: 'Inconsolata', monospace;
+    font-weight: bold;
+    background-color: hsl(8, 100%, 59%);
+    margin-left: 15px;
+    border-radius: 25px;
+}
+
+.swiper-container {
+    max-height: 95.5vh;
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    max-width: 100%;
+}
+
+.swiper-container img {
+    max-height: 95.5vh;
+    min-width: 100%;
+}
+
+.swiper-container {
+    /*align-content: center;*/
+    position: relative;
+    left: 30%;
+    width: 95.5vh;
+    height: 95.5vh;
+}
+
+.swiper-button-next, .swiper-rtl .swiper-button-prev{
+    color: hsl(56, 100%, 50%) !important;
+}
+.swiper-button-prev, .swiper-rtl .swiper-button-next{
+    color: hsl(56, 100%, 50%) !important;
+}
