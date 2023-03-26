@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <title>Ado No Color</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="Ado No Color">
+  <meta name="description" content="Ado No Color. Landing page.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/index.css">
+  <script src="scripts/timeLoad.js"></script>
+  <script src="scripts/timeCount.js"></script>
+  <script src="scripts/menu.js"></script>
+</head>
+<body onload="timeCount();">
+{{> menu }}
+
+{{{body}}}
+
+{{#if footer}}
+  {{> footer}}
+{{/if}}
+</body>
+<script src="scripts/authForm.js"></script>
+<html>
