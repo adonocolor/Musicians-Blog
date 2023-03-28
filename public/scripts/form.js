@@ -22,6 +22,7 @@ function newElement() {
    var t = document.createTextNode(inputValue);
    li.appendChild(t);
    if (inputValue === "") {
+      console.log('newElement in form.js(): you should write something first')
       return;
    } else {
       document.getElementById('list').appendChild(li);
