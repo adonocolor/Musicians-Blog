@@ -4,12 +4,15 @@ import { User } from "../../user/entities/user.entity";
 
 @Entity()
 export class Comment {
+
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({type: 'varchar'})
-  text: string;
+  @Column({type: 'timestamp'})
+  commentDate: Date;
 
+  @Column({type: 'varchar'})
+  commentText: string;
 
   @ManyToOne(() => User)
   user: User;

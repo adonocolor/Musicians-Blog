@@ -7,6 +7,7 @@ import { User } from "./user/entities/user.entity";
 import { PostModule } from './post/post.module';
 import { Comment } from "./post/entities/comment.entity";
 import { Post } from "./post/entities/post.entity";
+import { Category } from "./post/entities/category.entity";
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { Post } from "./post/entities/post.entity";
       username: 'ado_web_sem_6_db_user',
       password: 'tjjkcgw0HqXt2tumdnJ9wvoq2ukBZG3w',
       database: 'ado_web_sem_6_db',
-      entities: [User, Post, Comment],
+      entities: [User, Post, Comment, Category],
       synchronize: false,
       ssl: {
         ca: process.env.SSL_CERT,
