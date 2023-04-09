@@ -4,6 +4,7 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import * as hbs from 'express-handlebars';
 import { ResponseTimeInterceptor } from './timeload-server';
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -17,6 +18,15 @@ async function bootstrap() {
     layoutsDir: join(__dirname, '..', 'views/layouts'),
     defaultLayout: 'main',
   }));
+
+  const config = new DocumentBuilder()
+    .setTitle('Musician\'s Blog')
+    .setDescription('Musician\'s Blog API description')
+    .setVersion('1.0')
+    .addTag('Web')
+    .build();
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3005);
 }
