@@ -9,7 +9,7 @@ export class PostService {
   }
 
   findAll() {
-    return `This action returns all post`;
+    return `This action returns all posts`;
   }
 
   findOne(id: number) {
