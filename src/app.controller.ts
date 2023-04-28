@@ -11,6 +11,9 @@ import {
   ApiTags
 } from "@nestjs/swagger";
 import { AuthGuard } from "./auth/auth.guard";
+import { Session } from './auth/session/session.decorator';
+import { SessionContainer } from 'supertokens-node/recipe/session';
+import { getUserById } from 'supertokens-node/lib/build/recipe/thirdparty';
 
 
 @ApiExcludeController()
@@ -21,16 +24,30 @@ export class AppController {
 
   @UseGuards(new AuthGuard({ sessionRequired: false }))
   @Get('/index')
-  @Render('index')
-  getDefault(@Res() res: Response) {
-    return { layout: 'main', message: 'index', auth: true, footer: true };
+  @Render('index',)
+  async getDefault(@Session() session?: SessionContainer) {
+    const userId = session?.getUserId();
+    if (userId !== undefined) {
+      const user = await getUserById(userId);
+      console.log(user.email);
+      return { email: user.email };
+    } else {
+      return { email: null };
+    }
   }
 
   @UseGuards(new AuthGuard({ sessionRequired: false }))
   @Get('')
   @Render('index')
-  getIndex(@Res() res: Response) {
-    return { layout: 'main', message: 'index', auth: true, footer: true};
+  async getIndex(@Session() session?: SessionContainer) {
+    const userId = session?.getUserId();
+    if (userId !== undefined) {
+      const user = await getUserById(userId);
+      console.log(user.email);
+      return { email: user.email };
+    } else {
+      return { email: null };
+    }
   }
 
 
