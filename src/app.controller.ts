@@ -66,6 +66,13 @@ export class AppController {
     return { layout: 'main', message: 'create', footer: true};
   }
 
+  @Get('/user/callback/google')
+  @Render('callback')
+  async handleAuth() {
+    return { message: 'Hello world!' };
+  }
+
+
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Get('create-post')
   @Render('createPost')

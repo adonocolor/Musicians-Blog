@@ -14,14 +14,14 @@ async function googleSignInClicked() {
 
     window.location.assign(authUrl);
   } catch (err) {
-    if (err.isSuperTokensGeneralError === true) {
-      window.alert(err.message);
-    } else {
-      window.alert(
-        'Oops! Something went wrong.\n' + err.message
-          ? err.message
-          : 'message is undefined',
-      );
+        if (err.isSuperTokensGeneralError === true) {
+          window.alert(err.message);
+        } else {
+          window.alert(
+            'Oops! Something went wrong.\n' + err.message
+              ? err.message
+              : 'message is undefined',
+          );
     }
   }
 }
