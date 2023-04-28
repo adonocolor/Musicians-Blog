@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, Query, HttpStatus, UseGuards } from "@nestjs/common";
 import { PostService } from '../services/post.service';
 import { CreatePostDto } from '../dto/post/create-post.dto';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { User } from "../../user/entities/user.entity";
 import { UpdatePostDto } from "../dto/post/update-post.dto";
 import { UpdateUserDto } from "../../user/dto/update-user.dto";
@@ -16,6 +16,7 @@ export class PostController {
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiBody({type: CreatePostDto, description: 'Post Data Transfer Object that is being created'})
+  @ApiSecurity('basic')
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Post(':userId')
   create(@Param('userId') userId: number, @Body() createPostDto: CreatePostDto) {
@@ -35,6 +36,7 @@ export class PostController {
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'id', type: 'number', description: 'Post Id to be updated'})
   @ApiBody({type: CreatePostDto, description: 'Post Data Transfer Object that is being updated'})
+  @ApiSecurity('basic')
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Put('id/:id')
   update(@Body() updatePostDto: UpdatePostDto) {
@@ -45,6 +47,7 @@ export class PostController {
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'id', type: 'number', description: 'Post Id to be deleted'})
+  @ApiSecurity('basic')
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Delete(':id')
   remove(@Param('id') id: string) {

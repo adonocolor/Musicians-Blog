@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, HttpStatus, Query, UseGuards } from "@nestjs/common";
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { CreateCommentDto } from "../dto/comment/create-comment.dto";
 import { CreateUserDto } from "../../user/dto/create-user.dto";
 import { UpdateUserDto } from "../../user/dto/update-user.dto";
@@ -19,6 +19,7 @@ export class CommentController {
   @ApiParam({name: 'userId', type: 'number', description: 'User Id related to the created comment'})
   @ApiParam({name: 'postId', type: 'number', description: 'Post Id related to the created comment'})
   @ApiBody({type: CreateCommentDto, description: 'Comment Data Transfer Object'})
+  @ApiSecurity('basic')
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Post(':postId/:userId')
   create(@Query('userId') userId: number, @Query('postId') postId: number, @Body() createCommentDto: CreateCommentDto) {
@@ -39,6 +40,7 @@ export class CommentController {
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'id', type: 'number', description: 'Comment Id to be updated'})
+  @ApiSecurity('basic')
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Put(':id')
   update(@Param('id') id: number, @Body() updateCommentDto: UpdateCommentDto) {
@@ -49,6 +51,7 @@ export class CommentController {
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'id', type: 'number', description: 'Comment Id to be removed'})
+  @ApiSecurity('basic')
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Delete(':id')
   remove(@Param('id') id: number) {
@@ -59,7 +62,6 @@ export class CommentController {
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'postId', type: 'number', description: 'Post Id related to the comments'})
-  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Get('/:postId/all')
   getAllByPost(@Query('postId') postId: number) {
     return this.commentService.getAllByPost(postId)

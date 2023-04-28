@@ -3,9 +3,9 @@ import Session from 'supertokens-node/recipe/session';
 import Dashboard from 'supertokens-node/recipe/dashboard';
 
 export const appInfo = {
-  appName: 'brawlpedia',
-  apiDomain: 'https://gravitacia.onrender.com',
-  websiteDomain: 'https://gravitacia.onrender.com',
+  appName: 'ado-web-sem-6',
+  apiDomain: 'https://ado-web-sem-6.onrender.com',
+  websiteDomain: 'https://ado-web-sem-6.onrender.com',
   apiBasePath: '/api/auth',
   websiteBasePath: '/auth',
 };

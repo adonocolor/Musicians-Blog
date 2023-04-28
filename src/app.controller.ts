@@ -73,7 +73,6 @@ export class AppController {
     return { layout: 'main', message: 'create_post', footer: true};
   }
 
-  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Get('create-category')
   @Render('createCategory')
   createCategory(@Res() res: Response) {

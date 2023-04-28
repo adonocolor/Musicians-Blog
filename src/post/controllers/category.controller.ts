@@ -19,6 +19,8 @@ export class CategoryController {
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiBody({type: CreateCategoryDto, description: 'Category Data Transfer Object'})
   @UseGuards(new AuthGuard({ sessionRequired: true }))
+  @ApiSecurity('basic')
+  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto)
@@ -29,6 +31,8 @@ export class CategoryController {
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'id', type: 'number', description: 'Category Id to be found'})
+  @ApiSecurity('basic')
+  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.categoryService.getOne(id)
@@ -39,6 +43,8 @@ export class CategoryController {
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'id', type: 'number', description: 'Category Id to be updated'})
   @UseGuards(new AuthGuard({ sessionRequired: true }))
+  @ApiSecurity('basic')
+  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Put(':id')
   update(@Param('id') id: number, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update(id, updateCategoryDto)
@@ -48,6 +54,7 @@ export class CategoryController {
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
   @ApiParam({name: 'id', type: 'number', description: 'Category Id to be deleted'})
+  @ApiSecurity('basic')
   @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Delete(':name')
   remove(@Param('name') name: string) {
@@ -65,8 +72,6 @@ export class CategoryController {
   @ApiOperation({ summary: 'Get Category by name' })
   @ApiResponse({ status: HttpStatus.OK, description: 'The comment has been updated' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
-  @ApiSecurity('basic')
-  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Get(':name')
   getOneByName(@Param('name') name: string) {
     return this.categoryService.getOneByName(name)
