@@ -1,0 +1,39 @@
+<div id="create-category">
+  <h2>Create your category!</h2>
+
+  <form id="create-category-form" target="_blank" method="POST" action="/category/" onSubmit="window.location.reload();">
+    <label for="categoryName"></label><input type="text" id="categoryName" name="categoryName" placeholder="Category Name!">
+    <button id="submit-category" class="form-item" type="submit">Create</button>
+  </form>
+</div>
+
+<style>
+  #create-category {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #create-category-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .form-item {
+    font-family: 'Inconsolata', monospace;
+    border: none;
+    height: 30px;
+    width: 300px;
+    border-radius: 7px;
+    margin-top: 10px;
+  }
+
+  button.form-item {
+    height: 30px;
+    width: 60px;
+    font-weight: bold;
+  }
+</style>

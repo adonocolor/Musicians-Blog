@@ -25,12 +25,16 @@ auth.addEventListener("reset", ev => {
 
 function hideForm() {
   let form = document.getElementById('auth-form')
+  let q= document.getElementById('auth-quest')
   form.style.display = "none"
+  q.style.display = "none"
 }
 
 function showForm() {
   let form = document.getElementById('auth-form')
+  let q= document.getElementById('auth-quest')
   form.style.display = "flex"
+  q.style.display = "block"
 }
 
 function showLog() {

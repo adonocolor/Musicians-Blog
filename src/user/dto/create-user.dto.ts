@@ -12,4 +12,7 @@ export class CreateUserDto {
 
   @ApiProperty({ description: "Password", nullable: false })
   password: string;
+
+  @ApiProperty({ description: "Description", nullable: true})
+  description: string;
 }

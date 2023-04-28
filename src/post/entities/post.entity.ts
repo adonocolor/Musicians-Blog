@@ -1,4 +1,13 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne, OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
 import { User } from "../../user/entities/user.entity";
 import { Comment } from './comment.entity';
 import { Category } from "./category.entity";
@@ -8,25 +17,29 @@ export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 
+  constructor(postContent: string, postTitle: string, user: User, categories: Category[]) {
+    this.postContent = postContent;
+    this.postTitle = postTitle;
+    this.user = user;
+    this.categories = categories;
+  }
+
   @Column({type: 'varchar'})
   postContent: string;
 
   @Column({type: 'varchar'})
-  postUrl: string;
-
-  @Column({type: 'varchar'})
   postTitle: string;
 
-  @Column({type: 'timestamp'})
-  postDate: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  public createdAt!: Date;
 
-  @Column({type: 'timestamp'})
-  postModified: Date;
+  @UpdateDateColumn({ type: 'timestamp' })
+  public updatedAt!: Date;
 
   @ManyToOne(type => User, user => user.posts)
   user: User;
 
-  @ManyToOne(type => Comment, comment => comment.post)
+  @OneToMany(type => Comment, comment => comment.post)
   comments: Comment[];
 
   @ManyToMany(() => Category)

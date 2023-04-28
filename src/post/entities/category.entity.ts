@@ -3,12 +3,16 @@ import { Post } from "./post.entity";
 
 @Entity()
 export class Category {
+  constructor(categoryName: string) {
+    this.categoryName = categoryName;
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({type: 'varchar'})
   categoryName: string;
 
-  @Column({type: 'varchar'})
-  categoryUrl: string;
+  @ManyToMany(() => Post)
+  posts: Post[];
 }

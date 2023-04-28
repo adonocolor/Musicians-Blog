@@ -1,0 +1,43 @@
+<div id="create-post">
+  <h2>Create your post!</h2>
+  <form target="_blank" id="create-post-form" method="POST" action="/post/"
+        onsubmit="this.action = this.action + this.userId.value;">
+    <label for="userId"></label><input type="text" id="userId" name="userId" placeholder="User id">
+    <label for="PostTitle"></label><input class="form-item" type="text" id="PostTitle" name="postTitle" placeholder="Post Title" onsubmit="window.location.reload();">
+    <label for="PostContent"></label><input class="form-item" type="text" id="PostContent" name="postContent" placeholder="Post Content!">
+    <button id="submit-post" class="form-item" type="submit">Create</button>
+  </form>
+</div>
+
+
+
+<style>
+  #create-post {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #create-post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .form-item {
+    font-family: 'Inconsolata', monospace;
+    border: none;
+    height: 30px;
+    width: 300px;
+    border-radius: 7px;
+    margin-top: 10px;
+  }
+
+  button.form-item {
+    height: 30px;
+    width: 60px;
+    font-weight: bold;
+  }
+</style>

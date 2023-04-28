@@ -14,4 +14,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 
   @ApiProperty({ description: "Password", nullable: false })
   password: string;
+
+  @ApiProperty({ description: "Description", nullable: false })
+  description: string;
 }

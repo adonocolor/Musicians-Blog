@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpStatus, Render, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, HttpCode, HttpStatus, Render, UseGuards, UseInterceptors } from "@nestjs/common";
 import { AppService } from './app.service';
 import { Res } from '@nestjs/common';
 import { Response } from 'express';
@@ -10,6 +10,7 @@ import {
   ApiResponse,
   ApiTags
 } from "@nestjs/swagger";
+import { AuthGuard } from "./auth/auth.guard";
 
 
 @ApiExcludeController()
@@ -17,101 +18,77 @@ import {
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @ApiOperation({
-    summary: 'Index page'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK'
-  })
-  @Get('/')
-  @HttpCode(HttpStatus.OK)
+
+  @UseGuards(new AuthGuard({ sessionRequired: false }))
+  @Get('/index')
   @Render('index')
   getDefault(@Res() res: Response) {
-    return { layout: 'main', message: 'index', footer: true };
+    return { layout: 'main', message: 'index', auth: true, footer: true };
   }
 
-  @ApiOperation({
-    summary: 'Index page'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK'
-  })
-  @Get('/index')
-  @HttpCode(HttpStatus.OK)
+  @UseGuards(new AuthGuard({ sessionRequired: false }))
+  @Get('')
   @Render('index')
   getIndex(@Res() res: Response) {
-    return { layout: 'main', message: 'index', footer: true};
+    return { layout: 'main', message: 'index', auth: true, footer: true};
   }
 
-  @ApiOperation({
-    summary: 'Blog page'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK'
-  })
+
   @Get('/blog')
-  @HttpCode(HttpStatus.OK)
   @Render('blog')
   getBlog(@Res() res: Response) {
     return { layout: 'main', message: 'blog', footer: true};
   }
 
-  @ApiOperation({
-    summary: 'Contact page'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK'
-  })
+
   @Get('/contact')
-  @HttpCode(HttpStatus.OK)
   @Render('contact')
   getContact(@Res() res: Response) {
     return { layout: 'main', message: 'contact', footer: false};
   }
 
-  @ApiOperation({
-    summary: 'Music page'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK'
-  })
-  @Get('/music')
-  @HttpCode(HttpStatus.OK)
-  @Render('music')
-  getMusic(@Res() res: Response) {
-    return { layout: 'main', message: 'music', footer: true};
+  @Get('/profile')
+  @Render('profile')
+  getProfile(@Res() res: Response) {
+    return { layout: 'main', message: 'profile', footer: true};
   }
 
-  @ApiOperation({
-    summary: 'Notes page'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK'
-  })
-  @Get('/notes')
-  @HttpCode(HttpStatus.OK)
-  @Render('notes')
-  getNotes(@Res() res: Response) {
-    return { layout: 'main', message: 'notes', footer: true};
+  @Get('/posts')
+  @Render('posts')
+  getPosts(@Res() res: Response) {
+    return { layout: 'main', message: 'profile', footer: true};
   }
 
-  @ApiOperation({
-    summary: 'Photos page'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK'
-  })
-  @Get('/photos')
-  @HttpCode(HttpStatus.OK)
-  @Render('photos')
-  getPhotos(@Res() res: Response) {
-    return { layout: 'main', message: 'photos', footer: true};
+  @UseGuards(new AuthGuard({ sessionRequired: true }))
+  @Get('/create')
+  @Render('create')
+  create(@Res() res: Response) {
+    return { layout: 'main', message: 'create', footer: true};
+  }
+
+  @UseGuards(new AuthGuard({ sessionRequired: true }))
+  @Get('create-post')
+  @Render('createPost')
+  createPost(@Res() res: Response) {
+    return { layout: 'main', message: 'create_post', footer: true};
+  }
+
+  @UseGuards(new AuthGuard({ sessionRequired: true }))
+  @Get('create-category')
+  @Render('createCategory')
+  createCategory(@Res() res: Response) {
+    return { layout: 'main', message: 'create_category', footer: true};
+  }
+
+  @Render('register')
+  @Get('register')
+  createUser(@Res() res: Response) {
+    return { layout: 'main', message: 'register'  };
+  }
+
+  @Render('authForm')
+  @Get('auth-form')
+  authForm(@Res() res: Response) {
+    return { layout: 'main', message: 'authForm', footer: true};
   }
 }
