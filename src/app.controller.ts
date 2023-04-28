@@ -76,7 +76,6 @@ export class AppController {
     return { layout: 'main', message: 'profile', footer: true};
   }
 
-  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Get('/create')
   @Render('create')
   create(@Res() res: Response) {
@@ -105,7 +104,7 @@ export class AppController {
 
   @Render('register')
   @Get('register')
-  createUser(@Res() res: Response) {
+  createUserч(@Res() res: Response) {
     return { layout: 'main', message: 'register'  };
   }
 
