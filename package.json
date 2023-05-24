@@ -31,6 +31,8 @@
     "@nestjs/typeorm": "^9.0.1",
     "@types/express-handlebars": "^5.3.1",
     "bcrypt": "^5.1.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "dotenv": "^16.0.3",
     "express-handlebars": "^5.3.5",
     "hbs": "^4.2.0",

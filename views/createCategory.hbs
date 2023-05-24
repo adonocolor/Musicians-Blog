@@ -1,18 +1,41 @@
 <div id="create-category">
   <h2>Create your category!</h2>
 
-  <form id="create-category-form" target="_blank" method="POST" action="/category/" onSubmit="window.location.reload();">
-    <label for="categoryName"></label><input type="text" id="categoryName" name="categoryName" placeholder="Category Name!">
+  <form id="create-category-form" onsubmit="create(event, this)">
+    <input id="categoryName" class="form-item" type="text" name="categoryName" placeholder="Category Name!">
     <button id="submit-category" class="form-item" type="submit">Create</button>
   </form>
+
+  <button id="submit-post" class="form-item" onclick="window.location.href='create'" type="button">Previous Page</button>
+  <button id="get-cat" class="form-item" type="button" onclick="getAllCategories()">Check</button>
+  <div id="cat-names"></div>
 </div>
 
+<script src="scripts/category/getAll.js"></script>
+<script src="scripts/category/create.js"></script>
+<script src="scripts/category/delete.js"></script>
+<script src="scripts/category/update.js"></script>
+
+
 <style>
+  .category {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
   #create-category {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  #cat-names {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 30px;
   }
 
   #create-category-form {
@@ -31,9 +54,32 @@
     margin-top: 10px;
   }
 
+  .form-item-button {
+    font-family: 'Inconsolata', monospace;
+    border: none;
+    border-radius: 7px;
+    margin-top: 10px;
+    height: 30px;
+    width: 175px;
+    font-weight: bold;
+  }
+   .update-category-button {
+     font-family: 'Inconsolata', monospace;
+     border: none;
+     border-radius: 7px;
+     margin-top: 10px;
+     height: 30px;
+     width: 60px;
+     font-weight: bold;
+   }
+
   button.form-item {
     height: 30px;
     width: 60px;
     font-weight: bold;
+  }
+
+  footer {
+    display: none;
   }
 </style>

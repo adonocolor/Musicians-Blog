@@ -10,8 +10,6 @@ import {
   ApiResponse,
   ApiTags
 } from "@nestjs/swagger";
-import { AuthGuard } from "./auth/auth.guard";
-import { Session } from './auth/session/session.decorator';
 import { SessionContainer } from 'supertokens-node/recipe/session';
 import { getUserById } from 'supertokens-node/lib/build/recipe/thirdparty';
 
@@ -22,32 +20,16 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
 
-  @UseGuards(new AuthGuard({ sessionRequired: false }))
   @Get('/index')
-  @Render('index',)
-  async getDefault(@Session() session?: SessionContainer) {
-    const userId = session?.getUserId();
-    if (userId !== undefined) {
-      const user = await getUserById(userId);
-      console.log(user.email);
-      return { email: user.email };
-    } else {
-      return { email: null };
-    }
+  @Render('index')
+  async getInd(@Res() res: Response) {
+    return { layout: 'main', message: 'index', footer: true};
   }
 
-  @UseGuards(new AuthGuard({ sessionRequired: false }))
   @Get('')
   @Render('index')
-  async getIndex(@Session() session?: SessionContainer) {
-    const userId = session?.getUserId();
-    if (userId !== undefined) {
-      const user = await getUserById(userId);
-      console.log(user.email);
-      return { email: user.email };
-    } else {
-      return { email: null };
-    }
+  async getIndex(@Res() res: Response) {
+    return { layout: 'main', message: 'index', footer: true};
   }
 
 
@@ -89,7 +71,6 @@ export class AppController {
   }
 
 
-  @UseGuards(new AuthGuard({ sessionRequired: true }))
   @Get('create-post')
   @Render('createPost')
   createPost(@Res() res: Response) {

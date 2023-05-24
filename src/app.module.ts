@@ -5,23 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from "./user/user.module";
 import { User } from "./user/entities/user.entity";
 import { PostModule } from './post/post.module';
-import { Comment } from "./post/entities/comment.entity";
+import { Comment } from "./comment/entities/comment.entity";
 import { Post } from "./post/entities/post.entity";
-import { Category } from "./post/entities/category.entity";
+import { Category } from "./category/entities/category.entity";
 import { DataSource } from "typeorm";
-import { CommentService } from './post/services/comment.service';
-import { CategoryService } from './post/services/category.service';
-import { UserService } from "./user/services/user.service";
-import { AuthModule } from './auth/auth.module';
-import * as SuperTokensConfig from './auth/supertokens/supertokens.config';
+import { CommentModule } from './comment/comment.module';
+import { CategoryModule } from './category/category.module';
 @Module({
   imports: [
-    AuthModule.forRoot({
-      connectionURI: SuperTokensConfig.connectionUri,
-      apiKey: SuperTokensConfig.apiKey,
-      appInfo: SuperTokensConfig.appInfo,
-    }),
-
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'dpg-cgkmep4eoogkndjvlcm0-a.frankfurt-postgres.render.com',
@@ -35,7 +26,16 @@ import * as SuperTokensConfig from './auth/supertokens/supertokens.config';
         ca: process.env.SSL_CERT,
       },
       autoLoadEntities: true,
-    }), PostModule,
+    }),
+
+    UserModule,
+
+    PostModule,
+
+    CommentModule,
+
+    CategoryModule,
+
   ],
 
   controllers: [AppController],
