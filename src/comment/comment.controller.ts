@@ -5,19 +5,13 @@ import {
   Body,
   Param,
   Delete,
-  Put,
   HttpStatus,
-  Query,
-  UseGuards,
   Patch,
   Session
 } from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { CreateCommentDto } from "./dto/create-comment.dto";
-import { CreateUserDto } from "../user/dto/create-user.dto";
-import { UpdateUserDto } from "../user/dto/update-user.dto";
 import { UpdateCommentDto } from "./dto/update-comment.dto";
-import { PostService } from "../post/post.service";
 import { CommentService } from "./comment.service";
 import { SessionContainer } from "supertokens-node/recipe/session";
 

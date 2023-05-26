@@ -10,7 +10,6 @@ import {
 } from "@nestjs/swagger";
 import { SessionClaimValidator, SessionContainer } from "supertokens-node/recipe/session";
 import { AuthGuard } from "./auth/auth/auth.guard";
-import UserRoles from "supertokens-node/recipe/userroles";
 
 
 @ApiExcludeController()
