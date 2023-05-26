@@ -9,11 +9,12 @@ import { User } from "../user/entities/user.entity";
 import { UserModule } from "../user/user.module";
 import { CommentModule } from "../comment/comment.module";
 import { CategoryModule } from "../category/category.module";
+import { UserService } from "../user/services/user.service";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Post, Comment, Category, User]), UserModule, CommentModule, CategoryModule],
   exports: [TypeOrmModule],
   controllers: [PostController],
-  providers: [PostService],
+  providers: [PostService, UserService],
 })
 export class PostModule {}

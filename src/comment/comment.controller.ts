@@ -1,4 +1,17 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, HttpStatus, Query, UseGuards, Patch } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  HttpStatus,
+  Query,
+  UseGuards,
+  Patch,
+  Session
+} from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { CreateCommentDto } from "./dto/create-comment.dto";
 import { CreateUserDto } from "../user/dto/create-user.dto";
@@ -6,6 +19,7 @@ import { UpdateUserDto } from "../user/dto/update-user.dto";
 import { UpdateCommentDto } from "./dto/update-comment.dto";
 import { PostService } from "../post/post.service";
 import { CommentService } from "./comment.service";
+import { SessionContainer } from "supertokens-node/recipe/session";
 
 @ApiTags('Comments')
 @Controller('comment')
@@ -20,8 +34,8 @@ export class CommentController {
   @ApiBody({type: CreateCommentDto, description: 'Comment Data Transfer Object'})
   @ApiSecurity('basic')
   @Post(':postId/:userId')
-  create(@Param('userId') userId: number, @Param('postId') postId: number, @Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.create(userId, postId,  createCommentDto)
+  create(@Session() session: SessionContainer, @Param('postId') postId: number, @Body() createCommentDto: CreateCommentDto) {
+    return this.commentService.create(session, postId,  createCommentDto)
   }
 
 

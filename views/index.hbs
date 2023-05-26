@@ -3,11 +3,17 @@
     <h2 class="sign_title">Hey! I'm Ado!</h2>
     <div class="sign_info">
       <p>Here's what I make:</p>
+      <div class="auth"></div>
     </div>
   </div>
 </div>
 
-{{> signButtons }}
+<div id="authorization">
+  <p>*Btw, you aren't locked in as us</p>
+  <button id="sign-in" class="auth-item" type="button" onclick="window.location.href = 'signin';">Sign in</button>
+  <p>Don't have a profile? <a href="signup">Sign up</a></p>
+</div>
+
 <div class="contents-album">
   <h2 class="project_title"><b>Dreaming of Silence in Mono*</b></h2>
 
@@ -50,3 +56,5 @@
 </div>
 
 <script src="scripts/authForm.js"></script>
+<script src="scripts/auth/sessionCheck.js"></script>
+<script src="scripts/auth/signout.js"></script>

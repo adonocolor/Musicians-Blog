@@ -11,8 +11,20 @@ import { Category } from "./category/entities/category.entity";
 import { DataSource } from "typeorm";
 import { CommentModule } from './comment/comment.module';
 import { CategoryModule } from './category/category.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
+    AuthModule.forRoot({
+      connectionURI: "https://prod-be4a32b1fba611ed9413b5ca957fffcb-ap-southeast-1.aws.supertokens.io:3567",
+      apiKey: "G4VOGar7ZEQ0fj8ds-pp=gIufPd8Uw",
+      appInfo: {
+        appName: "ado-web-sem-6",
+        apiDomain: "https://ado-web-sem-6.onrender.com/",
+        websiteDomain: "https://ado-web-sem-6.onrender.com/",
+        apiBasePath: "/auth",
+        websiteBasePath: "/auth",
+      },
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'dpg-cgkmep4eoogkndjvlcm0-a.frankfurt-postgres.render.com',
@@ -21,7 +33,7 @@ import { CategoryModule } from './category/category.module';
       password: 'tjjkcgw0HqXt2tumdnJ9wvoq2ukBZG3w',
       database: 'ado_web_sem_6_db',
       entities: [User, Post, Comment, Category],
-      synchronize: false,
+      synchronize: true,
       ssl: {
         ca: process.env.SSL_CERT,
       },
@@ -35,7 +47,6 @@ import { CategoryModule } from './category/category.module';
     CommentModule,
 
     CategoryModule,
-
   ],
 
   controllers: [AppController],

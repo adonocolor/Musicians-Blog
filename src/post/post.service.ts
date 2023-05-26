@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotAcceptableException, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { CreatePostDto } from "./dto/create-post.dto";
 import { UpdatePostDto } from "./dto/update-post.dto";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -7,6 +7,10 @@ import { Repository } from "typeorm";
 import { Post } from "./entities/post.entity";
 import { Category } from "../category/entities/category.entity";
 import { CreateCategoryDto } from "../category/dto/create-category.dto";
+import Session, { SessionContainer } from "supertokens-node/recipe/session";
+import UserRoles from "supertokens-node/recipe/userroles";
+import EmailPassword from "supertokens-node/recipe/emailpassword";
+import { UserService } from "../user/services/user.service";
 
 @Injectable()
 export class PostService {
@@ -19,8 +23,19 @@ export class PostService {
   @InjectRepository(User)
   private readonly userRepository: Repository<User>;
 
-  async create(dto: CreatePostDto) {
-    let user = null
+
+  constructor(private readonly userService: UserService) {
+  }
+
+  async create(session: SessionContainer, dto: CreatePostDto) {
+    let userId = session.getUserId()
+    let newUser = await EmailPassword.getUserById(userId)
+    if (await this.userService.emailCheck(userId) === false) {
+      await this.userService.create(newUser)
+    }
+
+    let user = await this.userRepository.findOneBy({id : userId})
+
     let post: Post
     let categories = await this.categoryCheck(dto.categories)
     post = new Post(dto.postContent, dto.postTitle, user, categories)
@@ -38,7 +53,8 @@ export class PostService {
           id: true,
           commentText: true,
           user: {
-            username: true,
+            id: true,
+            email: true,
           }
         }
       },

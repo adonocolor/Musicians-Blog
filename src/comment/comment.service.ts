@@ -2,15 +2,14 @@ import { BadRequestException, Injectable, NotFoundException } from "@nestjs/comm
 import { InjectRepository } from "@nestjs/typeorm";
 import { Post } from "../post/entities/post.entity";
 import { Repository } from "typeorm";
-import { Category } from "../category/entities/category.entity";
-import { User } from "../user/entities/user.entity";
-import { CreateCategoryDto } from "../category/dto/create-category.dto";
-import { UpdateCategoryDto } from "../category/dto/update-category.dto";
 import { CreateCommentDto } from "./dto/create-comment.dto";
 import { UserService } from "../user/services/user.service";
 import { PostService } from "../post/post.service";
 import { UpdateCommentDto } from "./dto/update-comment.dto";
 import { Comment } from "./entities/comment.entity"
+import EmailPassword from "supertokens-node/recipe/emailpassword";
+import { SessionContainer } from "supertokens-node/recipe/session";
+import { User } from "../user/entities/user.entity";
 
 @Injectable()
 export class CommentService {
@@ -20,12 +19,21 @@ export class CommentService {
   @InjectRepository(Post)
   private readonly postRepository: Repository<Post>;
 
+  @InjectRepository(User)
+  private readonly userRepository: Repository<User>;
+
 
   constructor(private readonly userService: UserService, private readonly postService: PostService) {
   }
 
-  async create(userId: number, postId: number, dto: CreateCommentDto) {
-    let user = await this.userService.getOne(userId);
+  async create(session: SessionContainer, postId: number, dto: CreateCommentDto) {
+    let userId = session.getUserId()
+    let newUser = await EmailPassword.getUserById(userId)
+    if (await this.userService.emailCheck(userId) === false) {
+      await this.userService.create(newUser)
+    }
+
+    let user = await this.userRepository.findOneBy({id : userId})
     let post = await this.postService.getOne(postId);
 
     let c: Comment;

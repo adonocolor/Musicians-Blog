@@ -5,6 +5,7 @@ import { User } from "../entities/user.entity";
 import { CreateUserDto } from "../dto/create-user.dto";
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from "../dto/update-user.dto";
+import EmailPassword from "supertokens-node/recipe/emailpassword";
 
 @Injectable()
 export class UserService {
@@ -15,14 +16,12 @@ export class UserService {
   constructor(
   ) {}
 
-  async create(dto: CreateUserDto) {
-    await this.usernameCheck(dto.username)
-    let user: User;
-    user = new User(dto.username, dto.firstName, dto.lastName, dto.password, dto.description);
-    return await this.repository.save(user);
+  async create(user: EmailPassword.User) {
+    let newUser = new User(user.id, user.email);
+    return await this.repository.save(newUser);
   }
 
-  async getOne(id: number): Promise<User | null> {
+  async getOne(id: string): Promise<User | null> {
     if (await this.repository.findOneBy({ id }) === null)
       throw new NotFoundException()
     return await this.repository.findOneBy({ id });
@@ -32,19 +31,15 @@ export class UserService {
     return await this.repository.find()
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.repository.delete(id);
   }
 
-  async update(id: number, dto: UpdateUserDto) {
-    await this.usernameCheck(dto.username)
-    await this.repository.update({ id: id }, { ...dto })
-    return await this.getOne(id)
-  }
 
-  private async usernameCheck(username: string) {
-    let users = await this.repository.findBy({username : username})
+  async emailCheck(email: string) {
+    let users = await this.repository.findBy({email : email})
     if (users.length === 1)
-      throw new BadRequestException('There is a user with a username like this!')
+      return true
+    return false
   }
 }

@@ -7,6 +7,8 @@ import { ResponseTimeInterceptor } from './timeload-server';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import supertokens from "supertokens-node";
 import { ValidationPipe } from "@nestjs/common";
+import { SupertokensExceptionFilter } from "./auth/auth/auth.filter";
+import React from 'react';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -31,13 +33,13 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document);
 
-  // app.useGlobalFilters(new SupertokensExceptionFilter());
-  //
-  // app.enableCors({
-  //   origin: ['*'],
-  //   allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
-  //   credentials: true,
-  // });
+  app.enableCors({
+    origin: ['http://localhost:3005'],
+    allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
+    credentials: true,
+  });
+
+  app.useGlobalFilters(new SupertokensExceptionFilter());
 
 
   await app.listen(3005);

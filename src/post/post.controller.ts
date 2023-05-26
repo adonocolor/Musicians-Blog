@@ -10,7 +10,7 @@ import {
   HttpStatus,
   UseGuards,
   Patch,
-  NotFoundException, ValidationPipe, ParseIntPipe
+  NotFoundException, ValidationPipe, ParseIntPipe, Session
 } from "@nestjs/common";
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -18,6 +18,7 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiSecurity, ApiTags } fr
 import { User } from "../user/entities/user.entity";
 import { UpdatePostDto } from "./dto/update-post.dto";
 import { UpdateUserDto } from "../user/dto/update-user.dto";
+import { SessionContainer } from "supertokens-node/recipe/session";
 
 @ApiTags('Posts')
 @Controller('post')
@@ -30,8 +31,8 @@ export class PostController {
   @ApiBody({type: CreatePostDto, description: 'Post Data Transfer Object that is being created'})
   @ApiSecurity('basic')
   @Post('')
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postService.create(createPostDto);
+  create(@Session() session: SessionContainer, @Body() createPostDto: CreatePostDto) {
+    return this.postService.create(session, createPostDto);
   }
 
   @ApiOperation({summary: 'Find all Posts'})

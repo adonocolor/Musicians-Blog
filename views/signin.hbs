@@ -1,0 +1,34 @@
+
+<div id="create-post">
+<form id="signup" class="form-item" onsubmit="signin(event, this)">
+  <input type="text" class="form-item" placeholder="email" name="email">
+  <input type="password" class="form-item" placeholder="password" name="password">
+  <button class="form-item" type="submit">Sign In</button>
+</form>
+</div>
+
+<script src="scripts/auth/signin.js"></script>
+
+<style>
+  #create-post {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-item {
+    font-family: 'Inconsolata', monospace;
+    border: none;
+    height: 30px;
+    width: 300px;
+    border-radius: 7px;
+    margin-top: 10px;
+  }
+
+  button.form-item {
+    height: 50px;
+    width: 70px;
+    font-weight: bold;
+  }
+</style>
