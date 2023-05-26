@@ -1,7 +1,5 @@
 import { Controller, Get, HttpCode, HttpStatus, Render, UseGuards, UseInterceptors, Session } from "@nestjs/common";
 import { AppService } from './app.service';
-import { Res } from '@nestjs/common';
-import { Response } from 'express';
 import {
   ApiExcludeController,
   ApiExcludeEndpoint,

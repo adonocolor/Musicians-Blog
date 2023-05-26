@@ -8,7 +8,6 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import supertokens from "supertokens-node";
 import { ValidationPipe } from "@nestjs/common";
 import { SupertokensExceptionFilter } from "./auth/auth/auth.filter";
-import React from 'react';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -34,7 +33,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({
-    origin: ['http://localhost:3005'],
+    origin: ['https://ado-web-sem-6.onrender.com'],
     allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
     credentials: true,
   });
