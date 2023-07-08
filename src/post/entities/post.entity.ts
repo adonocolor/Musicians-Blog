@@ -11,7 +11,6 @@ import {
 import { User } from "../../user/entities/user.entity";
 import { Comment } from '../../comment/entities/comment.entity';
 import { Category } from "../../category/entities/category.entity";
-import { IsString } from "class-validator";
 
 @Entity()
 export class Post {

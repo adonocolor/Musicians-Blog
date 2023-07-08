@@ -4,7 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   CreateDateColumn,
-  UpdateDateColumn, AutoEncryptionLoggerLevel
+  UpdateDateColumn,
 } from "typeorm";
 import { Post } from "../../post/entities/post.entity";
 

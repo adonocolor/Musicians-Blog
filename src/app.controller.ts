@@ -1,15 +1,10 @@
-import { Controller, Get, HttpCode, HttpStatus, Render, UseGuards, UseInterceptors, Session } from "@nestjs/common";
+import { Controller, Get, Render} from "@nestjs/common";
 import { AppService } from './app.service';
+import { Res } from '@nestjs/common';
+import { Response } from 'express';
 import {
   ApiExcludeController,
-  ApiExcludeEndpoint,
-  ApiOperation,
-  ApiParam,
-  ApiResponse,
-  ApiTags
 } from "@nestjs/swagger";
-import { SessionClaimValidator, SessionContainer } from "supertokens-node/recipe/session";
-import { AuthGuard } from "./auth/auth/auth.guard";
 
 
 @ApiExcludeController()
@@ -20,60 +15,76 @@ export class AppController {
 
   @Get('/index')
   @Render('index')
-  async getInd(@Session() session: SessionContainer) {
+  async getInd(@Res() res: Response) {
     return { layout: 'main', message: 'index', footer: true};
   }
 
   @Get('')
   @Render('index')
-  async getIndex(@Session() session: SessionContainer) {
+  async getIndex(@Res() res: Response) {
     return { layout: 'main', message: 'index', footer: true};
+  }
+
+
+  @Get('/blog')
+  @Render('blog')
+  getBlog(@Res() res: Response) {
+    return { layout: 'main', message: 'blog', footer: true};
   }
 
 
   @Get('/contact')
   @Render('contact')
-  getContact(@Session() session: SessionContainer) {
+  getContact(@Res() res: Response) {
     return { layout: 'main', message: 'contact', footer: false};
+  }
+
+  @Get('/profile')
+  @Render('profile')
+  getProfile(@Res() res: Response) {
+    return { layout: 'main', message: 'profile', footer: true};
   }
 
   @Get('/posts')
   @Render('posts')
-  getPosts(@Session() session: SessionContainer) {
+  getPosts(@Res() res: Response) {
     return { layout: 'main', message: 'profile', footer: true};
   }
 
   @Get('/create')
   @Render('create')
-  @UseGuards(new AuthGuard())
-  async create(@Session() session: SessionContainer) {
+  create(@Res() res: Response) {
     return { layout: 'main', message: 'create', footer: true};
+  }
+
+  @Get('/user/callback/google')
+  @Render('callback')
+  async handleAuth() {
+    return { message: 'Hello world!' };
   }
 
 
   @Get('create-post')
   @Render('createPost')
-  @UseGuards(new AuthGuard())
-  createPost(@Session() session: SessionContainer) {
+  createPost(@Res() res: Response) {
     return { layout: 'main', message: 'create_post', footer: true};
   }
 
   @Get('create-category')
   @Render('createCategory')
-  @UseGuards(new AuthGuard())
-  createCategory(@Session() session: SessionContainer) {
+  createCategory(@Res() res: Response) {
     return { layout: 'main', message: 'create_category', footer: true};
   }
 
-  @Render('signup')
-  @Get('signup')
-  signup(@Session() session: SessionContainer) {
-    return { layout: 'main', message: 'signUp', footer: true};
+  @Render('register')
+  @Get('register')
+  createUser(@Res() res: Response) {
+    return { layout: 'main', message: 'register'  };
   }
 
-  @Render('signin')
-  @Get('signin')
-  signin(@Session() session: SessionContainer) {
-    return { layout: 'main', message: 'signIn', footer: true};
+  @Render('authForm')
+  @Get('auth-form')
+  authForm(@Res() res: Response) {
+    return { layout: 'main', message: 'authForm', footer: true};
   }
 }
